@@ -7,7 +7,7 @@ const router = express.Router();
 
 router.use(authenticate);
 
-router.get("/", getAllOperators);
-router.post("/", authRole("admin"), createOperator);
+router.get("/getOprator", getAllOperators);
+router.post("/creatOprator", authRole("admin"), createOperator);
 
 module.exports = router;

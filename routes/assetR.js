@@ -13,10 +13,10 @@ const router = express.Router();
 router.use(authenticate);
 
 router.get("/getAsset", getAllAssets);
-router.post("/createAsset", authRole("admin"), createAsset);
-router.put("/updateAsset", authRole("admin"), updateAsset);
-router.delete("/deleteAsset", authRole("admin"), deleteAsset);
-router.post("/assign", authRole("admin"), assignAsset);
-router.post("/unassign", authRole("admin"), unassignAsset);
+router.post("/createAsset",authenticate, authRole("admin"), createAsset);
+router.put("/updateAsset", authenticate,authRole("admin"), updateAsset);
+router.delete("/deleteAsset", authenticate,authRole("admin"), deleteAsset);
+router.post("/assign", authenticate,authRole("admin"), assignAsset);
+router.post("/unassign", authenticate,authRole("admin"), unassignAsset);
 
 module.exports = router;

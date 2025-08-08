@@ -1,6 +1,7 @@
 const express = require("express");
 const app = express();
 const cors = require("cors");
+const cookieParser = require("cookie-parser");
 
 const connectDB = require("./config/database");
 const authRoutes = require("./routes/authR");
@@ -14,6 +15,7 @@ require("dotenv").config();
  }))
 
 app.use(express.json());
+app.use(cookieParser());
 
 connectDB.connect();
 
@@ -21,7 +23,7 @@ app.use('/api/auth', authRoutes);
 app.use('/api/assets', assetRoutes);
 app.use('/api/operators', operatorRoutes);
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 8000;
 app.listen(PORT, ()=> 
     console.log(`Server is running on port ${PORT}`)
 );

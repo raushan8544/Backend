@@ -52,7 +52,7 @@ exports.updateAsset = async (req, res)=> {
 
 exports.deleteAsset = async (req, res)=> {
     try {
-         await Asset.findByIdAndDelete(req.params.id);
+         await Asset.findByIdAndDelete(req.params.id, req.body);
         res.json({
         success: true,
         message: "Asset deleted successfully"

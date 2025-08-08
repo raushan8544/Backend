@@ -31,22 +31,25 @@ require("dotenv").config();
 
     }
     catch (error){
+        console.error("Authentication error:", error);
         return res.status(401).json({
             success: false,
-            message: 'Authentication failed',
+            message:error.message|| 'Authentication failed',
         });
     }
 }
 
-exports.authRole = (...roles)=>{
+exports.authRole = (...roles) => {
     return (req, res, next) => {
-        if (!roles.includes(req.user.role)) {
-            return res.status(403).json({
+        const userRole = req.user?.role?.toLowerCase();
+        const allowed = roles.map(r => r.toLowerCase());
+
+        if (!allowed.includes(userRole)) {
+            return res.status(402).json({
                 success: false,
-                message: 'Access denied',
+                message: "Access denied",
             });
         }
         next();
-    }
-}
-
+    };
+};
